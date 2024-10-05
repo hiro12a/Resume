@@ -1,7 +1,7 @@
 # Docs for the Azure Web Apps Deploy action: https://github.com/Azure/webapps-deploy
 # More GitHub Actions for Azure: https://github.com/Azure/actions
 
-name: Build and deploy ASP.Net Core app to Azure Web App - thomresume
+name: Build and deploy ASP.Net Core app to Azure Web App - resumeapp
 
 on:
   push:
@@ -25,13 +25,13 @@ jobs:
         run: dotnet build --configuration Release
 
       - name: dotnet publish
-        run: dotnet publish -c Release -o ./publish
+        run: dotnet publish -c Release -o ${{env.DOTNET_ROOT}}/myapp
 
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v4
         with:
           name: .net-app
-          path: ./publish
+          path: ${{env.DOTNET_ROOT}}/myapp
 
   deploy:
     runs-on: windows-latest
@@ -51,15 +51,15 @@ jobs:
       - name: Login to Azure
         uses: azure/login@v2
         with:
-          client-id: ${{ secrets.AZUREAPPSERVICE_CLIENTID_A3B179391C744CC9B88FEB583ADD1EA0 }}
-          tenant-id: ${{ secrets.AZUREAPPSERVICE_TENANTID_B9EC3D352E3042EC947231A30A09F6AD }}
-          subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID_B1C21DF266544ACCA370AAA6AA4C5255 }}
+          client-id: ${{ secrets.AZUREAPPSERVICE_CLIENTID_4341BDBCC6904D689B6E0B67EA5184D6 }}
+          tenant-id: ${{ secrets.AZUREAPPSERVICE_TENANTID_F7CE5BCCC5BB4DAE9E8965948C95F3A8 }}
+          subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID_07C1A3A5258C49CD9F8F00EE3C9DFE6D }}
 
       - name: Deploy to Azure Web App
         id: deploy-to-webapp
         uses: azure/webapps-deploy@v3
         with:
-          app-name: 'thomresume'
+          app-name: 'resumeapp'
           slot-name: 'Production'
           package: .
           
