@@ -14,7 +14,6 @@ namespace Resume.Models
         public string? Summary {get;set;}
         public string? Certification {get;set;}
         public string? Skills {get;set;}
-        public SubTitle? SubTitle { get; set;}
         public List<Job>? Job {get;set;}
     }
 }

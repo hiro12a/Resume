@@ -29,6 +29,7 @@ builder.Services.AddControllers().AddNewtonsoftJson(options => {
 builder.Services.AddScoped<IResumeRepository, ResumeRepository>();
 builder.Services.AddScoped<IJobRepository, JobRepository>();
 builder.Services.AddScoped<ITokenService, TokenServices>();
+builder.Services.AddScoped<ICounterRepository, CounterRepository>();
 
 // Connect to Database
 builder.Services.AddDbContext<ApplicationDbContext>(options => 
@@ -101,6 +102,18 @@ builder.Services.AddSwaggerGen(option =>
     });
 });
 
+// Add cors so that the angular application can access data from this web api
+builder.Services.AddCors(options => 
+{
+    options.AddPolicy("AllowAngularApp",
+        policy => 
+        {
+            policy.WithOrigins("http://localhost:4200") // Angular app url
+                .AllowAnyHeader()
+                .AllowAnyMethod();
+        });
+});
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -109,6 +122,9 @@ if (!app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
+// Use cors
+app.UseCors("AllowAngularApp");
 
 // Lets us use swagger in production
 app.UseSwagger();

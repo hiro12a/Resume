@@ -17,6 +17,7 @@ namespace Resume.Data
         public DbSet<ResumeTemplate> ResumeTemplate {get;set;}
         public DbSet<Job> Jobs { get; set; }
         public DbSet<SubTitle> SubTitles { get; set; }
+        public DbSet<VisitorCounter> VisitorCounter { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {   
