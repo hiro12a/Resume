@@ -13,9 +13,6 @@ namespace Resume.DTO
         public string? Summary {get;set;}
         public string? Certification {get;set;}
         public string? Skills {get;set;}
-        public DateTime StartDate {get;set;}
-        public DateTime EndDate {get;set;}
-
         // Get the jobs and subtitle
         public List<MyJobDTOs>? JobDTOs {get;set;}
     }

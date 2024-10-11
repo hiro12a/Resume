@@ -33,7 +33,7 @@ builder.Services.AddScoped<ICounterRepository, CounterRepository>();
 
 // Connect to Database
 builder.Services.AddDbContext<ApplicationDbContext>(options => 
-options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnections")));
+options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnections")));
 
 // For Identity
 builder.Services.AddIdentity<AppUsers, IdentityRole>(option => {
